@@ -24,6 +24,15 @@
                 <input type="text" style="width:140px;" class="border-0 over_name" name="over_name">
               </div>
             </div>
+            @if ($errors->any())
+              <div class="alert alert-danger">
+              <ul>
+              @foreach ($errors->has('over_name') as $error)
+              <li>{{ $error }}</li>
+              @endforeach
+              </ul>
+              </div>
+            @endif
             <div class="" style="width:140px">
               <label class=" d-block m-0" style="font-size:13px">名</label>
               <div class="border-bottom border-primary" style="width:140px;">
