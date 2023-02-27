@@ -31,9 +31,11 @@ return [
     |
     */
 
-    'lifetime' => env('SESSION_LIFETIME', 120),
+    'lifetime' => env('SESSION_LIFETIME', 3),
+    // 有効期限を120分（2時間）に設定する
 
-    'expire_on_close' => false,
+    'expire_on_close' => true,
+    // ブラウザを閉じた時点でセッションを破棄する
 
     /*
     |--------------------------------------------------------------------------
