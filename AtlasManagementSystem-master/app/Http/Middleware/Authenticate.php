@@ -15,7 +15,8 @@ class Authenticate extends Middleware
     protected function redirectTo($request)
     {
         if (! $request->expectsJson()) {
-            return route('login');
+            return route('loginView');
         }
+        // rote('〇〇')の〇〇の部分は、web.phpに記載のあるnameの値が入る。
     }
 }
