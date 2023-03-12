@@ -16,6 +16,6 @@ class Subjects extends Model
     ];
 
     public function users(){ //多対多の「多」側なので複数系
-        return $this->belongsToMany('App\Models\Users\User','subject_users','id','id');// リレーションの定義
+        return $this->belongsToMany('App\Models\Users\User','subject_users','subject_id','user_id');// リレーションの定義
     }
 }

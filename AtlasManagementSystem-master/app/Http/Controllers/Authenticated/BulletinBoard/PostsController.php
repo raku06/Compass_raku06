@@ -12,6 +12,7 @@ use App\Models\Posts\Like;
 use App\Models\Users\User;
 use App\Http\Requests\BulletinBoard\PostFormRequest;
 use Auth;
+use Validator;
 
 class PostsController extends Controller
 {
@@ -40,6 +41,7 @@ class PostsController extends Controller
 
     public function postDetail($post_id){
         $post = Post::with('user', 'postComments')->findOrFail($post_id);
+        // findOrFail(id名)は一致するidを見つけるためのクエリ。findOrFail()は一致するidが見つからなかった場合、404エラーを返す。(find()だとLaravelのエラー画面に遷移する)
         return view('authenticated.bulletinboard.post_detail', compact('post'));
     }
 
@@ -57,7 +59,33 @@ class PostsController extends Controller
         return redirect()->route('post.show');
     }
 
+
     public function postEdit(Request $request){
+
+        // バリデーション設定
+        $rules =[
+            'post_title' => ['required', 'string', 'max:100'],
+            'post_body' => ['required', 'string', 'max:5000'],
+        ];
+        $messages =[
+            'post_title.max' => 'タイトルは100文字以内で入力してください。',
+            'post_body.max' => '最大文字数は5000文字です。',
+            // 必須事項
+            'post_title.required' => 'タイトルを入力してください。',
+            'post_body.required' => '内容を入力してください。',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        //バリデーション:エラー
+    if ($validator->fails()) {
+        return redirect()
+        ->back()
+        ->withErrors($validator)
+        ->withInput();
+        }
+
+
         Post::where('id', $request->post_id)->update([
             'post_title' => $request->post_title,
             'post' => $request->post_body,
