@@ -30,5 +30,6 @@ class Post extends Model
     // コメント数
     public function commentCounts($post_id){
         return Post::with('postComments')->find($post_id)->postComments();
+        // find($post_id)で選択した投稿とリレーションで紐ついているコメントの配列をreturnで返している。
     }
 }
