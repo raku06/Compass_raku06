@@ -35,6 +35,21 @@
   @can('admin')
   <div class="w-25 ml-auto mr-auto">
     <div class="category_area mt-5 p-5">
+      @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->get('main_category_name') as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+            @foreach ($errors->get('main_category_id') as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+            @foreach ($errors->get('sub_category_name') as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+         </ul>
+    </div>
+    @endif
       <div class="">
         <p class="m-0">メインカテゴリー</p>
         <input type="text" class="w-100" name="main_category_name" form="mainCategoryRequest">
