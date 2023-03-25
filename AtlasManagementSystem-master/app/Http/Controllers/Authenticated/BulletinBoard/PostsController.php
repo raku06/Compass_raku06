@@ -11,6 +11,8 @@ use App\Models\Posts\PostComment;
 use App\Models\Posts\Like;
 use App\Models\Users\User;
 use App\Http\Requests\BulletinBoard\PostFormRequest;
+use App\Http\Requests\BulletinBoard\CommentFormRequest;
+use App\Http\Requests\BulletinBoard\CategoryFormRequest;
 use Auth;
 use Validator;
 
@@ -60,32 +62,7 @@ class PostsController extends Controller
     }
 
 
-    public function postEdit(Request $request){
-
-        // バリデーション設定
-        $rules =[
-            'post_title' => ['required', 'string', 'max:100'],
-            'post_body' => ['required', 'string', 'max:5000'],
-        ];
-        $messages =[
-            'post_title.max' => 'タイトルは100文字以内で入力してください。',
-            'post_body.max' => '最大文字数は5000文字です。',
-            // 必須事項
-            'post_title.required' => 'タイトルを入力してください。',
-            'post_body.required' => '内容を入力してください。',
-        ];
-
-        $validator = Validator::make($request->all(), $rules, $messages);
-
-        //バリデーション:エラー
-    if ($validator->fails()) {
-        return redirect()
-        ->back()
-        ->withErrors($validator)
-        ->withInput();
-        }
-
-
+    public function postEdit(PostFormRequest $request){
         Post::where('id', $request->post_id)->update([
             'post_title' => $request->post_title,
             'post' => $request->post_body,
@@ -102,28 +79,15 @@ class PostsController extends Controller
         return redirect()->route('post.input');
     }
 
-    public function commentCreate(Request $request){
-        // バリデーション設定
-        $rules =[
-            'comment' => ['required', 'string', 'max:2500'],
-        ];
-        $messages =[
-            'comment.max' => 'コメントは2500文字以内で入力してください。',
-            // 必須事項
-            'comment.required' => 'コメントを入力してください。',
-        ];
+    public function subCategoryCreate(Request $request){
+        SubCategory::create([
+            'sub_category' => $request->sub_category_name,
+            'main_category_id'=>$request->main_category_id,
+            ]);
+        return redirect()->route('post.input');
+    }
 
-        $validator = Validator::make($request->all(), $rules, $messages);
-
-        //バリデーション:エラー
-    if ($validator->fails()) {
-        return redirect()
-        ->back()
-        ->withErrors($validator)
-        ->withInput();
-        }
-
-
+    public function commentCreate(CommentFormRequest $request){
         PostComment::create([
             'post_id' => $request->post_id,
             'user_id' => Auth::id(),

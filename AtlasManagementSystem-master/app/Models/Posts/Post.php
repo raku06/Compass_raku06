@@ -24,7 +24,8 @@ class Post extends Model
     }
 
     public function subCategories(){
-        // リレーションの定義
+        // リレーションの定義（多対多）
+        return $this->hasMany('App\Models\Categories\SubCategory');
     }
 
     // コメント数
