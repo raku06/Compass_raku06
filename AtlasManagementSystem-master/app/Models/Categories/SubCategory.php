@@ -20,6 +20,6 @@ class SubCategory extends Model
 
     public function posts(){
         // リレーションの定義（多対多）
-        return $this->hasMany('App\Models\Posts\Post');
+        return $this->belongsToMany('App\Models\Posts\Post');
     }
 }
