@@ -58,9 +58,10 @@ class PostsController extends Controller
             'user_id' => Auth::id(),
             'post_title' => $request->post_title,
             'post' => $request->post_body,
-            'sub_category_id'=>$request->sub_category_id
         ]);
-        return redirect()->route('post.show', ['id' => $request->sub_category_id]);
+        $sub_category_id = $request->sub_category_id;
+        $post->subCategories()->attach($sub_category_id);
+        return redirect()->route('post.show');
     }
 
 
