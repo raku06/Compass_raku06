@@ -11,7 +11,9 @@
       <div class="post_bottom_area d-flex">
         <div class="d-flex post_status">
           <div>
-            <span class="category_btn">{{$post->subCategories->sub_category}}</span>
+            @foreach($post->subCategories as $sub_category)
+            <p class="category_btn">{{$sub_category->sub_category}}</p>
+           @endforeach
           </div>
           <div class="mr-5">
             <i class="fa fa-comment"></i><span class="">{{$post_comment->commentCounts($post->id)->count()}}</span>
