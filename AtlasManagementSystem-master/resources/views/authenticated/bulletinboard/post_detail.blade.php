@@ -6,6 +6,9 @@
       <div class="p-3">
         <div class="detail_inner_head">
           <div>
+            @foreach($post->subCategories as $sub_category)
+            <p class="category_btn">{{$sub_category->sub_category}}</p>
+           @endforeach
           </div>
           @if ($errors->any())
           <div class="alert alert-danger">
