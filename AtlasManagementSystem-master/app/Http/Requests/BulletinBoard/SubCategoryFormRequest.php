@@ -25,7 +25,7 @@ class SubCategoryFormRequest extends FormRequest
     {
         return [
             // 'main_category_name' => ['required', 'string', 'max:100', 'unique:main_categories,main_category'],
-            'main_category_id' => ['required', 'exists:sub_categories,main_category_id'],
+            'main_category_id' => ['required', 'exists:main_categories,id'],
             'sub_category_name' => ['required', 'string', 'max:100', 'unique:sub_categories,sub_category'],
         ];
     }
