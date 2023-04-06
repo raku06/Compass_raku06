@@ -3,6 +3,7 @@
 namespace App\Http\Requests\BulletinBoard;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class SubCategoryFormRequest extends FormRequest
 {
@@ -26,7 +27,8 @@ class SubCategoryFormRequest extends FormRequest
         return [
             // 'main_category_name' => ['required', 'string', 'max:100', 'unique:main_categories,main_category'],
             'main_category_id' => ['required', 'exists:main_categories,id'],
-            'sub_category_name' => ['required', 'string', 'max:100', 'unique:sub_categories,sub_category'],
+            'sub_category_name' => ['required', 'string', 'max:100', Rule::unique('sub_categories', 'sub_category')
+                    ->where('main_category_id', $this->main_category_id)],
         ];
     }
 
