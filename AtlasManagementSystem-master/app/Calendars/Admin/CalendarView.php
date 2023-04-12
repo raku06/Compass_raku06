@@ -35,12 +35,13 @@ class CalendarView{
 
     foreach($weeks as $week){
       $html[] = '<tr class="'.$week->getClassName().'">';
+
       $days = $week->getDays();
       foreach($days as $day){
         $startDay = $this->carbon->format("Y-m-01");
         $toDay = $this->carbon->format("Y-m-d");
         if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
-          $html[] = '<td class="past-day border">';
+          $html[] = '<td class="past-day border">';// 過去の日付をグレーアウトしてそう。
         }else{
           $html[] = '<td class="border '.$day->getClassName().'">';
         }
@@ -57,10 +58,16 @@ class CalendarView{
     return implode("", $html);
   }
 
+// 週の設定
   protected function getWeeks(){
     $weeks = [];
+
+    // 初日
     $firstDay = $this->carbon->copy()->firstOfMonth();
+
+    // 月末まで
     $lastDay = $this->carbon->copy()->lastOfMonth();
+
     $week = new CalendarWeek($firstDay->copy());
     $weeks[] = $week;
     $tmpDay = $firstDay->copy()->addDay(7)->startOfWeek();

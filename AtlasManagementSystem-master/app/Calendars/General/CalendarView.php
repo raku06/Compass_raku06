@@ -2,6 +2,7 @@
 namespace App\Calendars\General;
 
 use Carbon\Carbon;
+// CarbonはLaravelで日付を扱う時に使うライブラリ
 use Auth;
 
 class CalendarView{
@@ -11,10 +12,12 @@ class CalendarView{
     $this->carbon = new Carbon($date);
   }
 
+// タイトル
   public function getTitle(){
     return $this->carbon->format('Y年n月');
   }
 
+// カレンダーを出力する
   function render(){
     $html = [];
     $html[] = '<div class="calendar text-center">';
@@ -31,22 +34,27 @@ class CalendarView{
     $html[] = '</tr>';
     $html[] = '</thead>';
     $html[] = '<tbody>';
+
     $weeks = $this->getWeeks();
+
     foreach($weeks as $week){
       $html[] = '<tr class="'.$week->getClassName().'">';
 
       $days = $week->getDays();
       foreach($days as $day){
-        $startDay = $this->carbon->copy()->format("Y-m-01");
-        $toDay = $this->carbon->copy()->format("Y-m-d");
+        $startDay = $this->carbon->copy()->format("Y-m-01");// 今月の初日 ("Y-m-01"の01がポイント)
+        $toDay = $this->carbon->copy()->format("Y-m-d");// 今日の日付
 
-        if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
-          $html[] = '<td class="calendar-td">';
+        if($startDay <= $day->everyDay() && $toDay > $day->everyDay()){
+          $html[] = '<td class="calendar-td past-day">';// past-dayで過去の日付をグレーアウトしてそう。
         }else{
           $html[] = '<td class="calendar-td '.$day->getClassName().'">';
         }
         $html[] = $day->render();
 
+        // 下記、条件の確認
+        // authReserveDay()にeveryDay()があるか
+        // →該当の日が予約日かどうか
         if(in_array($day->everyDay(), $day->authReserveDay())){
           $reservePart = $day->authReserveDate($day->everyDay())->first()->setting_part;
           if($reservePart == 1){
@@ -56,13 +64,20 @@ class CalendarView{
           }else if($reservePart == 3){
             $reservePart = "リモ3部";
           }
-          if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
+          // 下記、条件の確認
+          // 該当日が月初よりも後で、今日よりも後の場合
+          if($startDay <= $day->everyDay() && $toDay > $day->everyDay()){
             $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px"></p>';
             $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
           }else{
             $html[] = '<button type="submit" class="btn btn-danger p-0 w-75" name="delete_date" style="font-size:12px" value="'. $day->authReserveDate($day->everyDay())->first()->setting_reserve .'">'. $reservePart .'</button>';
             $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
           }
+        // elseif条件追加
+        // 該当の日が予約日でなく、月初よりも後で、今日よりも後の場合
+        }elseif (!in_array($day->everyDay(), $day->authReserveDay()) && $startDay <= $day->everyDay() && $toDay > $day->everyDay()) {
+          $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px">受付終了</p>';
+            $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
         }else{
           $html[] = $day->selectPart($day->everyDay());
         }
@@ -78,18 +93,31 @@ class CalendarView{
     $html[] = '<form action="/delete/calendar" method="post" id="deleteParts">'.csrf_field().'</form>';
 
     return implode('', $html);
-  }
+  } // --- function render() ---
 
   protected function getWeeks(){
     $weeks = [];
+
+    // 初日
     $firstDay = $this->carbon->copy()->firstOfMonth();
+
+    // 月末まで
     $lastDay = $this->carbon->copy()->lastOfMonth();
+
+    // １週目
     $week = new CalendarWeek($firstDay->copy());
     $weeks[] = $week;
+
+    // 作業の日
     $tmpDay = $firstDay->copy()->addDay(7)->startOfWeek();
+
+    // 月末までループさせる
     while($tmpDay->lte($lastDay)){
+      // 週カレンダーviewを作成する
       $week = new CalendarWeek($tmpDay, count($weeks));
       $weeks[] = $week;
+
+      // 1週ごとに+7日することで$tmpDayを翌週に移動する
       $tmpDay->addDay(7);
     }
     return $weeks;

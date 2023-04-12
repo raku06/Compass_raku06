@@ -27,11 +27,13 @@ Route::group(['middleware' => 'auth'], function(){
             Route::get('/top', 'TopsController@show')->name('top.show');
         });
         Route::namespace('Calendar')->group(function(){
+            // 生徒が見れるページ(general)
             Route::namespace('General')->group(function(){
                 Route::get('/calendar/{user_id}', 'CalendarsController@show')->name('calendar.general.show');
                 Route::post('/reserve/calendar', 'CalendarsController@reserve')->name('reserveParts');
                 Route::post('/delete/calendar', 'CalendarsController@delete')->name('deleteParts');
             });
+            // 管理者（教師）が見れるページ（admin）
             Route::namespace('Admin')->group(function(){
                 Route::get('/calendar/{user_id}/admin', 'CalendarsController@show')->name('calendar.admin.show');
                 Route::get('/calendar/{id}/{data}/{part?}', 'CalendarsController@reserveDetail')->name('calendar.admin.detail');
