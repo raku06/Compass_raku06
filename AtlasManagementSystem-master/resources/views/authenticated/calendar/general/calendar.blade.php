@@ -15,4 +15,24 @@
     </div>
   </div>
 </div>
+
+
+
+<div id="reserve-modal" class="modal">
+  <div class="modal__bg js-modal-close"></div>
+  <div class="modal__content">
+            <p>予約日：'. $day->authReserveDate($day->everyDay())->first()->setting_reserve .'</p>
+            <p>時間：'.$reservePart.'</p>
+            <p>上記の予約をキャンセルしてもよろしいですか？</p>
+            <button id="reserve-modal-close">閉じる</button>
+            <button onclick="deletePost()">キャンセル</button>
+  </div>
+</div>
+
+<script>
+
+             function deletePost() {
+               // 削除処理を行う
+             }
+</script>
 @endsection

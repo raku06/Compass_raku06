@@ -70,7 +70,7 @@ class CalendarView{
             $html[] = '<p class="m-auto p-0 w-75" style="font-size:13px">'.$reservePart.'参加</p>';
             $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
           }else{
-            $html[] = '<button type="submit" class="btn btn-danger p-0 w-75" name="delete_date" style="font-size:12px" value="'. $day->authReserveDate($day->everyDay())->first()->setting_reserve .'" onclick="return confirm(\'予約日：'. $day->authReserveDate($day->everyDay())->first()->setting_reserve .'\n\n時間：'.$reservePart.'\n\n上記の予約をキャンセルしてもよろしいですか？\')">'. $reservePart .'</button>';
+            $html[] = '<button type="submit" class="btn btn-danger p-0 w-75" id="reserve-modal-open" name="delete_date" style="font-size:12px" value="'. $day->authReserveDate($day->everyDay())->first()->setting_reserve .' " >'. $reservePart .'</button>';
             $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
           }
         // elseif条件追加
@@ -94,6 +94,8 @@ class CalendarView{
 
     return implode('', $html);
   } // --- function render() ---
+
+
 
   protected function getWeeks(){
     $weeks = [];
@@ -121,5 +123,15 @@ class CalendarView{
       $tmpDay->addDay(7);
     }
     return $weeks;
+
+    // $html[] ='<div id="reserve-modal modal">
+    //          <p>予約日：'. $day->authReserveDate($day->everyDay())->first()->setting_reserve .'</p>
+    //          <p>時間：'.$reservePart.'</p>
+    //          <p>上記の予約をキャンセルしてもよろしいですか？</p>
+    //          <button id="reserve-modal-close">閉じる</button>
+    //          <button onclick="deletePost()">キャンセル</button>
+    //           </div>';
   }
+
+
 }
