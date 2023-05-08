@@ -30,7 +30,7 @@ class PostsController extends Controller
             ->orWhere('post', 'like', '%'.$request->keyword.'%')->get();
         }else if($request->category_word){
             $sub_category = $request->category_word;
-            $main_category_id = $request->input('data-main_category_id');
+            $main_category_id = $request->category_id;
             $posts = Post::with('user', 'postComments', 'subCategories')->whereHas('subCategories', function ($query) use ($main_category_id, $sub_category) {$query->where('main_category_id', $main_category_id)->where('sub_category', $sub_category);})->get();
         }else if($request->like_posts){
             $likes = Auth::user()->likePostId()->get('like_post_id');

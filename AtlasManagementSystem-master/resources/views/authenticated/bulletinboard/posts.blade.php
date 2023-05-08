@@ -43,9 +43,12 @@
         @foreach($categories as $category)
         <li class="main_categories" category_id="{{ $category->id }}"><span>{{ $category->main_category }}</span></li>
         @foreach($category->subCategories as $sub_category)
-        <li><input type="submit" name="category_word" class="category_btn" category_id="{{ $sub_category->id }}" data-main_category_id="{{ $sub_category->main_category_id }}" value="{{ $sub_category->sub_category }}" form="postSearchRequest" >
+        <li>
+          <form action="{{ route('post.show') }}" method="get" id="postSearchRequest_{{$sub_category->id}}">
+            <input type="submit" name="category_word" class="category_btn" value="{{ $sub_category->sub_category }}" form="postSearchRequest_{{$sub_category->id}}">
+            <input type="hidden" name="category_id" class="category_btn" value="{{$sub_category->main_category_id}}" form="postSearchRequest_{{$sub_category->id}}">
+          </form>
         </li>
-
         @endforeach
         @endforeach
       </ul>
