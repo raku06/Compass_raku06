@@ -22,17 +22,14 @@
   <div class="modal__bg js-modal-close"></div>
   <div class="modal__content">
             <p>予約日：<span class="reserve-date"></span></p>
+            <input type="hidden" class="reserve_date" name="reserve_date" form="deleteParts">
             <p>時間： <span class="reserve-part"></p>
+            <input type="hidden" class="reserve_part" name="reserve_part" form="deleteParts">
             <p>上記の予約をキャンセルしてもよろしいですか？</p>
             <button class="reserve-modal-close">閉じる</button>
-            <button onclick="deletePost()">キャンセル</button>
+            <div class="text-right w-75 m-auto">
+              <input type="submit" class="btn btn-danger" value="キャンセル" form="deleteParts">
+            </div>
   </div>
 </div>
-
-<script>
-
-             function deletePost() {
-               // 削除処理を行う
-             }
-</script>
 @endsection
