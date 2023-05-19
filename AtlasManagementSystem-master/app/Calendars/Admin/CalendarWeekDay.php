@@ -31,13 +31,13 @@ class CalendarWeekDay{
 
     $html[] = '<div class="text-left">';
     if($one_part){
-      $html[] = '<p class="day_part m-0 pt-1">1部 <span>'.$one_part->get()->count().'</span> </p>';
+      $html[] = '<p class="day_part m-0 pt-1"> <a href="'.$ymd.'/1"> 1部</a> <span> '.$one_part->users->count().'</span> </p>';
     }
     if($two_part){
-      $html[] = '<p class="day_part m-0 pt-1">2部 <span>'.ReserveSettings::with('users')->where('setting_reserve', $ymd)->where('setting_part', '2')->get()->count().'</span></p>';
+      $html[] = '<p class="day_part m-0 pt-1"><a href="'.$ymd.'/2"> 2部</a> <span> '.$two_part->users->count().'</p>';
     }
     if($three_part){
-      $html[] = '<p class="day_part m-0 pt-1">3部</p>';
+      $html[] = '<p class="day_part m-0 pt-1"><a href="'.$ymd.'/3"> 3部</a> <span> '.$three_part->users->count().'</span></p>';
     }
     $html[] = '</div>';
 
