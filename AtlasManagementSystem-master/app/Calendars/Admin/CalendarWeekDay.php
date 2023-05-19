@@ -31,10 +31,10 @@ class CalendarWeekDay{
 
     $html[] = '<div class="text-left">';
     if($one_part){
-      $html[] = '<p class="day_part m-0 pt-1">1部</p>';
+      $html[] = '<p class="day_part m-0 pt-1">1部 <span>'.$one_part->get()->count().'</span> </p>';
     }
     if($two_part){
-      $html[] = '<p class="day_part m-0 pt-1">2部</p>';
+      $html[] = '<p class="day_part m-0 pt-1">2部 <span>'.$two_part->get()->count().'</span></p>';
     }
     if($three_part){
       $html[] = '<p class="day_part m-0 pt-1">3部</p>';
