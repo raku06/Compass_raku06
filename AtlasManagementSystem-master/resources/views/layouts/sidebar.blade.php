@@ -19,18 +19,21 @@
   <div class="d-flex">
     <div class="sidebar">
       @section('sidebar')
-      <p><a href="{{ route('top.show') }}">トップ</a></p>
-      <p><a href="/logout">ログアウト</a></p>
-      <p><a href="{{ route('calendar.general.show',['user_id' => Auth::id()]) }}">スクール予約</a></p>
-      @if(Auth::user()->role == 1 ||
-          Auth::user()->role == 2 ||
-          Auth::user()->role == 3)
-      <p><a href="{{ route('calendar.admin.show',['user_id' => Auth::id()]) }}">スクール予約確認</a></p>
-      <p><a href="{{ route('calendar.admin.setting',['user_id' => Auth::id()]) }}">スクール枠登録</a></p>
-      @endif
-      <p><a href="{{ route('post.show') }}">掲示板</a></p>
-      <p><a href="{{ route('user.show') }}">ユーザー検索</a></p>
-      @show
+      <div class="sidebar-inner">
+        <p><a href="{{ route('top.show') }}"><img class="sidebar-icon" src="/images/home.svg" alt="">トップ</a></p>
+              <p class="logout"><a href="/logout"><img class="sidebar-icon" src="/images/logout.svg" alt="">ログアウト</a></p>
+              <p><a href="{{ route('calendar.general.show',['user_id' => Auth::id()]) }}"><img class="sidebar-icon calendar" src="/images/calendar-note.svg" alt="">スクール予約</a></p>
+              @if(Auth::user()->role == 1 ||
+                  Auth::user()->role == 2 ||
+                  Auth::user()->role == 3)
+              <p><a href="{{ route('calendar.admin.show',['user_id' => Auth::id()]) }}"><img class="sidebar-icon calendar" src="/images/calendar-check.svg" alt="">スクール予約確認</a></p>
+              <p><a href="{{ route('calendar.admin.setting',['user_id' => Auth::id()]) }}"><img class="sidebar-icon calendar" src="/images/calendar-add.svg" alt="">スクール枠登録</a></p>
+              @endif
+              <p class="left-alt-text-bubble"><a href="{{ route('post.show') }}"><img class="sidebar-icon left-alt-text" src="/images/left-alt-text-bubble.svg" alt="">掲示板</a></p>
+              <p><a href="{{ route('user.show') }}"><img class="sidebar-icon user-search" src="/images/user-search.svg" alt="">ユーザー検索</a></p>
+              @show
+      </div>
+
     </div>
 
     <div class="main-container">

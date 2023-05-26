@@ -24,8 +24,8 @@
 @endif -->
 
   <form action="{{ route('registerPost') }}" method="POST">
-    <div class="w-100 vh-100 d-flex" style="align-items:center; justify-content:center;">
-      <div class="w-25 vh-75 border p-3">
+    <div class="w-100 vh-100 d-flex all_content" style="align-items:center; justify-content:center;">
+      <div class="w-25 vh-75 register-area" style="background-color: #fff;">
         <div class="register_form">
           <div class="d-flex mt-3" style="justify-content:space-between">
             <div class="" style="width:140px">
@@ -107,13 +107,19 @@
         </ul>
     </div>
            @endif
-        <div class="mt-3">
-          <input type="radio" name="sex" class="sex" value="1">
-          <label style="font-size:13px">男性</label>
-          <input type="radio" name="sex" class="sex" value="2">
-          <label style="font-size:13px">女性</label>
-          <input type="radio" name="sex" class="sex" value="3">
-          <label style="font-size:13px">その他</label>
+        <div class="register-radio">
+          <div class=register-radio-box>
+            <input type="radio" name="sex" class="sex" value="1">
+            <label style="font-size:13px">男性</label>
+          </div>
+          <div class="register-radio-box">
+            <input type="radio" name="sex" class="sex" value="2">
+            <label style="font-size:13px">女性</label>
+          </div>
+          <div class="register-radio-box">
+            <input type="radio" name="sex" class="sex" value="3">
+            <label style="font-size:13px">その他</label>
+          </div>
         </div>
         @if ($errors->has('sex'))
     <div class="alert alert-danger">
@@ -219,14 +225,24 @@
            @endif
         <div class="mt-3">
           <label class="d-block m-0" style="font-size:13px">役職</label>
-          <input type="radio" name="role" class="admin_role role" value="1">
-          <label style="font-size:13px">教師(国語)</label>
-          <input type="radio" name="role" class="admin_role role" value="2">
-          <label style="font-size:13px">教師(数学)</label>
-          <input type="radio" name="role" class="admin_role role" value="3">
-          <label style="font-size:13px">教師(英語)</label>
-          <input type="radio" name="role" class="other_role role" value="4">
-          <label style="font-size:13px" class="other_role">生徒</label>
+          <div class="register-radio-role">
+            <div class="register-radio-box">
+              <input type="radio" name="role" class="admin_role role" value="1">
+              <label style="font-size:13px">教師(国語)</label>
+            </div>
+            <div class="register-radio-box">
+              <input type="radio" name="role" class="admin_role role" value="2">
+              <label style="font-size:13px">教師(数学)</label>
+            </div>
+            <div class="register-radio-box">
+              <input type="radio" name="role" class="admin_role role" value="3">
+              <label style="font-size:13px">教師(英語)</label>
+            </div>
+            <div class="register-radio-box">
+              <input type="radio" name="role" class="other_role role" value="4">
+              <label style="font-size:13px" class="other_role">生徒</label>
+            </div>
+          </div>
         </div>
         <div class="select_teacher d-none">
           <label class="d-block m-0" style="font-size:13px">選択科目</label>
@@ -276,11 +292,11 @@
         </ul>
     </div>
            @endif
-        <div class="mt-5 text-right">
+        <div class="text-right register-btn">
           <input type="submit" class="btn btn-primary register_btn" disabled value="新規登録" onclick="return confirm('登録してよろしいですか？')">
         </div>
         <div class="text-center">
-          <a href="{{ route('loginView') }}">ログイン</a>
+          <a href="{{ route('loginView') }}">ログインはこちら</a>
         </div>
       </div>
       {{ csrf_field() }}

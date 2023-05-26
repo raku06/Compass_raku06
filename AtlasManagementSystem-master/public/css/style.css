@@ -7,6 +7,67 @@
 }
 
 /* body */
+.atlas-img {
+  text-align: center;
+  margin-bottom: 3%;
+}
+
+.atlas-img img {
+  width: 60%;
+}
+
+.login-area {
+  border-radius: 10px;
+  box-shadow: 0 5px 10px 1px #d1d1d1;
+  padding: 10px 10px 30px;
+}
+
+.login-btn {
+  padding-right: 2%;
+  padding-bottom: 1%;
+}
+
+.register-area {
+  border-radius: 10px;
+  box-shadow: 0 5px 10px 1px #d1d1d1;
+  padding: 2% 2% 30px;
+}
+
+.register-radio {
+  display: flex;
+  justify-content: space-around;
+  padding: 5% 0 0;
+}
+
+select.old_year {
+  border: none !important;
+  border-bottom: solid 1px #017bff !important;
+  padding-right: 10%;
+}
+
+select.old_month {
+  border: none !important;
+  border-bottom: solid 1px #017bff !important;
+  padding-right: 10%;
+  margin-left: 2%;
+}
+
+select.old_day {
+  border: none !important;
+  border-bottom: solid 1px #017bff !important;
+  padding-right: 10%;
+  margin-left: 2%;
+}
+
+.register-radio-role {
+  display: flex;
+  justify-content: space-between;
+}
+
+.register-btn {
+  margin: 5% 0 2% !important;
+}
+
 .all_content {
   background: #ECF1F6;
 }
@@ -36,24 +97,65 @@ label {
 
 /* サイドバー */
 .sidebar {
-  width: 150px;
-  height: 100vh;
+  width: 210px;
+  min-height: 100vh;
   background-color: #03AAD2;
   font-weight: bold;
+  padding-top: 1%;
+}
+
+.sidebar-inner {
+  position: fixed;
+  width: 180px;
 }
 
 .main-container {
   width: 100%;
 }
 
+.sidebar p {
+  padding: 0 5%;
+}
+
+.sidebar .logout {
+  padding: 0 6%;
+}
+
+.sidebar .left-alt-text-bubble {
+  padding: 0 6%;
+}
+
 .sidebar p a {
   color: #FFF;
+  display: block;
+  width: 100%;
+}
+
+.sidebar-icon {
+  width: 15%;
+  margin-right: 3%;
+}
+
+.sidebar-icon.calendar {
+  width: 16%;
+  margin-right: 3%;
+}
+
+.sidebar-icon.left-alt-text {
+  width: 15%;
+  margin-right: 4%;
+}
+
+.sidebar-icon.user-search {
+  width: 18%;
+  margin-right: 3%;
 }
 
 /* トップページ */
 .user_status {
   border-radius: 10px;
   background: #FFF;
+  box-shadow: 0 5px 10px 1px #d1d1d1;
 }
 
 /* スクール予約関連 */
@@ -149,13 +251,22 @@ label {
   border-radius: 10px;
 }
 
-.post_bottom_area {
-  justify-content: space-between;
+.post_status {
+  width: 100%;
+  justify-content: space-between
+}
+
+.post_category .category_btn {
+  background-color: #02aad2;
+  padding: 5% 10px;
+  border-radius: 10px;
 }
 
 .like_btn,
 .un_like_btn {
   cursor: pointer;
+  color: #999;
+  padding-right: 5px;
 }
 
 .un_like,
@@ -163,9 +274,86 @@ label {
   color: #E2254D;
 }
 
+.fa-comment {
+  color: #999;
+  padding-right: 5px;
+}
+
 .error_message {
   font-size: 12px;
   color: red;
+}
+
+.posts-name {
+  color: #aaa;
+  font-weight: bold;
+}
+
+.post_title {
+  color: #111;
+  font-weight: bold;
+  transition: .3s;
+}
+
+.post_title:hover {
+  text-decoration: none;
+  transition: .3s;
+}
+
+.posts_btn a {
+  display: block;
+  width: 280px;
+  padding: 10px 5px;
+  color: #fff;
+  background-color: #02aad2;
+  text-align: center;
+  border-radius: 10px;
+  margin: 48px 0 20px;
+  transition: .3s;
+}
+
+.posts_btn a:hover {
+  background-color: #0000FF;
+  text-decoration: none;
+  color: #fff;
+  transition: .3s;
+}
+
+.sesrch_area {
+  position: relative;
+  width: 280px;
+  margin-bottom: 20px;
+}
+
+.search_keyword {
+  position: absolute;
+  left: 0;
+  top: 0;
+  border: 1px solid #999;
+  border-style: solid none solid solid;
+  background-color: transparent;
+  border-radius: 10px 0 0 10px;
+  padding: 5px 1px;
+  width: 200px;
+
+}
+
+.search_keyword_btn {
+  position: relative;
+  left: 200px;
+  padding: 5px 1px;
+  border: 1px solid transparent;
+  background-color: #02aad2;
+  color: #fff;
+  width: 80px;
+  border-radius: 0 10px 10px 0;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.search_keyword_btn:hover {
+  background-color: #0000FF;
+  transition: .3s;
 }
 
 /* 掲示板 詳細画面 */
@@ -247,12 +435,76 @@ label {
   border: none;
   background: #999;
   color: #FFF;
+  cursor: pointer;
 }
 
 .main_categories span,
-.sub_categories li input {
+.sub_categories input {
   list-style: none;
   cursor: pointer;
+}
+
+.main_categories {
+  border-bottom: 1px solid #494949;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  font-size: 16px;
+}
+
+.sub_category_btn {
+  border: none;
+  border-bottom: 1px solid #494949;
+  display: flex;
+  justify-content: space-between;
+  background-color: transparent;
+  width: 80%;
+  margin: 20px 0 0 10px;
+  font-size: 13px;
+}
+
+.main_category_box .sub_category_box {
+  display: none;
+}
+
+.main_category_box.open .sub_category_box {
+  display: block;
+  margin-bottom: 30px;
+}
+
+.main_categories_arrow {
+  position: absolute;
+  bottom: 3px;
+  right: 10px;
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-top: 2px solid #494949;
+  border-left: 2px solid #494949;
+  transform: rotate(45deg);
+}
+
+.main_category_box.open .main_categories_arrow {
+  transform: rotate(-135deg);
+  bottom: 5px;
+}
+
+.category_btn.like_btn {
+  width: 138px;
+  background-color: #fc94e2;
+  padding: 5px 1px;
+  font-size: 14px;
+}
+
+.category_btn.my_posts_btn {
+  width: 138px;
+  background-color: #fcbd3f;
+  padding: 5px 1px;
+  font-size: 14px;
+}
+
+.categories_search {
+  margin-top: 20px;
 }
 
 /* ユーザー検索 */
