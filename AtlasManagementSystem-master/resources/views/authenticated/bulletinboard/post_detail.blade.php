@@ -10,19 +10,20 @@
             <p class="category_btn">{{$sub_category->sub_category}}</p>
            @endforeach
           </div>
-          @if ($errors->any())
           <div class="alert alert-danger">
               <ul>
-                  @foreach ($errors->all() as $error)
-                      <li>{{ $error }}</li>
-                  @endforeach
+            @foreach ($errors->get('post_title') as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+            @foreach ($errors->get('post_body') as $error)
+                <li>{{ $error }}</li>
+            @endforeach
               </ul>
           </div>
-          @endif
           @if ($post->user->id === Auth::user()->id)
           <div>
-            <span class="edit-modal-open" post_title="{{ $post->post_title }}" post_body="{{ $post->post }}" post_id="{{ $post->id }}">編集</span>
-            <a href="{{ route('post.delete', ['id' => $post->id]) }}" onclick="return confirm('削除してよろしいですか？')">削除</a>
+            <span class="edit-modal-open edit-btn" post_title="{{ $post->post_title }}" post_body="{{ $post->post }}" post_id="{{ $post->id }}">編集</span>
+            <a class="delete-btn" href="{{ route('post.delete', ['id' => $post->id]) }}" onclick="return confirm('削除してよろしいですか？')">削除</a>
           </div>
           @endif
         </div>
@@ -57,8 +58,15 @@
   <div class="w-50 p-3">
     <div class="comment_container border m-5">
       <div class="comment_area p-3">
+        <div class="alert alert-danger">
+              <ul>
+                  @foreach ($errors->get('comment') as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+              </ul>
+          </div>
         <p class="m-0">コメントする</p>
-        <textarea class="w-100" name="comment" form="commentRequest"></textarea>
+        <textarea class="w-100 category_input" name="comment" form="commentRequest"></textarea>
         <input type="hidden" name="post_id" form="commentRequest" value="{{ $post->id }}">
         <input type="submit" class="btn btn-primary" form="commentRequest" value="投稿">
         <form action="{{ route('comment.create') }}" method="post" id="commentRequest">{{ csrf_field() }}</form>
@@ -72,10 +80,10 @@
     <form action="{{ route('post.edit') }}" method="post">
       <div class="w-100">
         <div class="modal-inner-title w-50 m-auto">
-          <input type="text" name="post_title" placeholder="タイトル" class="w-100">
+          <input type="text" name="post_title" placeholder="タイトル" class="w-100 category_input">
         </div>
         <div class="modal-inner-body w-50 m-auto pt-3 pb-3">
-          <textarea placeholder="投稿内容" name="post_body" class="w-100"></textarea>
+          <textarea placeholder="投稿内容" name="post_body" class="w-100 category_input"></textarea>
         </div>
         <div class="w-50 m-auto edit-modal-btn d-flex">
           <a class="js-modal-close btn btn-danger d-inline-block" href="">閉じる</a>

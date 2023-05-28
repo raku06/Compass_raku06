@@ -164,7 +164,7 @@ label {
 }
 
 .day-sat {
-  color: #0000FF;
+  color: #0000FF !important;
 }
 
 .day-sun {
@@ -198,6 +198,16 @@ label {
 
 .adjust-table-btn {
   width: 70%;
+}
+
+.reserve_setting_outer {
+  background-color: #fff;
+  width: 90%;
+  height: 90%;
+}
+
+.reserve_setting p {
+  text-align: center;
 }
 
 /* モーダル */
@@ -358,7 +368,7 @@ label {
 
 /* 掲示板 詳細画面 */
 .contributor {
-  font-size: 12px;
+  font-size: 14px;
   color: #999;
   font-weight: bold;
 }
@@ -368,13 +378,19 @@ label {
 }
 
 .detsail_post {
-  font-size: 12px;
+  font-size: 14px;
   color: #9E9E9E;
 }
 
 .detail_inner_head {
   display: flex;
   justify-content: space-between;
+}
+
+.detail_inner_head .category_btn {
+  background-color: #02aad2;
+  padding: 5% 10px;
+  border-radius: 10px;
 }
 
 .edit-modal-open {
@@ -461,6 +477,7 @@ label {
   width: 80%;
   margin: 20px 0 0 10px;
   font-size: 13px;
+  cursor: pointer;
 }
 
 .main_category_box .sub_category_box {
@@ -507,17 +524,79 @@ label {
   margin-top: 20px;
 }
 
+.sub_category_title {
+  padding: 50px 0 0;
+}
+
+.sub_category_error ul {
+  padding: 2px 0;
+}
+
+.main_category_name,
+.sub_category_name {
+  margin: 2px 0 15px;
+}
+
+.category_input {
+  border: 1px #d1d1d1 solid;
+}
+
+.edit-btn {
+  background-color: #017bff;
+  color: #fff;
+  padding: 7% 15px;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: .3s;
+}
+
+.edit-btn:hover {
+  background-color: #0069d9;
+  transition: .3s;
+}
+
+.delete-btn {
+  background-color: #E2254D;
+  color: #fff;
+  padding: 7% 15px;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: .3s;
+}
+
+.delete-btn:hover {
+  color: #fff;
+  text-decoration: none;
+  background-color: #c82334;
+  transition: .3s;
+}
+
 /* ユーザー検索 */
 .reserve_users_area {
   display: flex;
   flex-wrap: wrap;
-  width: 800px;
-  margin: 10px auto;
-  height: 80vh;
-  overflow: scroll;
-  padding: 10px;
-  background: #FFF;
+  justify-content: space-between;
+  align-content: flex-start;
+  /* width: 800px; */
+  margin: 0 auto;
+  /* height: 80vh; */
+  /* overflow: scroll; */
+  padding: 0 40px;
+  /* background: #FFF; */
   border-radius: 5px;
+}
+
+.reserve_users_area::before {
+  content: "";
+  display: block;
+  width: 23%;
+  order: 1;
+}
+
+.reserve_users_area::after {
+  content: "";
+  display: block;
+  width: 23%;
 }
 
 .reserve_users_area span {
@@ -525,25 +604,166 @@ label {
 }
 
 .one_person {
-  width: 250px;
+  width: 23%;
   height: 250px;
+  background-color: #fff;
+  padding: 20px;
+  margin-top: 30px;
+  border-radius: 10px;
+  box-shadow: 0 5px 10px 1px #d1d1d1;
 }
 
-.search_conditions span {
+.one_person .one_person_inner {
+  padding-bottom: 10px;
+}
+
+.span_label {
+  color: #9E9E9E;
+}
+
+.search_conditions {
   cursor: pointer;
+  border-bottom: 1px solid #999;
+  display: block;
+  width: 80%;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.search_conditions .search_conditions_arrow {
+  position: absolute;
+  bottom: 3px;
+  right: 10px;
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-top: 2px solid #494949;
+  border-left: 2px solid #494949;
+  transform: rotate(45deg);
+}
+
+.search_conditions.open .search_conditions_arrow {
+  transform: rotate(-135deg);
+  bottom: 5px;
 }
 
 .search_conditions_inner {
   display: none;
-  background: #FFF;
+  background: transparent;
+
 }
 
 .subject_edit_btn {
-  font-size: 12px;
-  color: #0000FF;
   cursor: pointer;
+  display: block;
+  width: 130px;
+  position: relative;
+  font-size: 15px;
+  color: #03AAD2;
+  margin-bottom: 20px;
+}
+
+.subject_edit_btn .subject_edit_btn_arrow {
+  position: absolute;
+  bottom: 7px;
+  right: 10px;
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-top: 2px solid #03AAD2;
+  border-left: 2px solid #03AAD2;
+  transform: rotate(45deg);
+}
+
+.subject_edit_btn.open .subject_edit_btn_arrow {
+  transform: rotate(-135deg);
+  bottom: 9px;
 }
 
 .subject_inner {
   display: none;
+}
+
+.subject_inner span {
+  padding-right: 5px;
+}
+
+.search_text {
+  font-size: 20px;
+  color: #494949;
+  margin-top: 80px;
+}
+
+.free_word {
+  border: none;
+  background-color: #e0dfdf;
+  width: 80%;
+  padding: 10px 5px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.search_category_select_container {
+  display: flex;
+  flex-direction: column;
+}
+
+.search_category_select_label {
+  margin-bottom: 5px;
+}
+
+.search_category_select {
+  border: none;
+  background-color: #e0dfdf;
+  width: 30%;
+  padding: 10px 5px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  color: #111;
+}
+
+.sex_box {
+  margin-bottom: 20px;
+}
+
+.sex_box input {
+  margin-right: 8px;
+}
+
+.selected_engineer {
+  display: flex;
+}
+
+.selected_engineer div {
+  padding: 0 8px;
+}
+
+.search_submit {
+  padding: 5px 0;
+  width: 80%;
+  color: #fff;
+  background-color: #02aad2;
+  border: none;
+  border-radius: 10px;
+  margin-top: 50px;
+  transition: .3s;
+}
+
+.search_submit:hover {
+  background-color: #002eff;
+  transition: .3s;
+}
+
+.search_reset_btn {
+  border: none;
+  width: 80%;
+  text-align: center;
+  color: #02aad2;
+  transition: .3s;
+  margin-top: 50px;
+}
+
+.search_reset_btn:hover {
+  color: #002eff;
+  transition: .3s;
 }
