@@ -67,9 +67,14 @@ $(function () {
     $(this).toggleClass("open");
   });
 
+  $('.main_category_box').click(function () {
+    $(this).children('.sub_category_box').slideToggle();
+  });
+
   $('.search_conditions').on('click', function () {
     $(this).toggleClass("open");
   });
+
 
   $('.subject_edit_btn').on('click', function () {
     $(this).toggleClass("open");

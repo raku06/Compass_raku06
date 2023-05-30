@@ -538,7 +538,6 @@ p.day {
 }
 
 .main_category_box.open .sub_category_box {
-  display: block;
   margin-bottom: 30px;
 }
 
