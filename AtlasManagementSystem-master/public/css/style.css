@@ -164,7 +164,7 @@ label {
 }
 
 .day-sat {
-  color: #0000FF !important;
+  color: #0000FF;
 }
 
 .day-sun {
@@ -185,29 +185,82 @@ label {
 }
 
 .adjust-table {
-  width: 70% !important;
+  width: 100% !important;
 }
 
 .adjust-table td {
   padding: 0 !important;
 }
 
+.adjust-area {
+  padding-bottom: 15px;
+}
+
 .adjust-area p {
   justify-content: space-around;
 }
 
-.adjust-table-btn {
-  width: 70%;
-}
-
 .reserve_setting_outer {
   background-color: #fff;
-  width: 90%;
+  width: 75%;
   height: 90%;
+  border-radius: 10px;
+  box-shadow: 0 5px 10px 1px #d1d1d1;
 }
 
-.reserve_setting p {
+.reserve_setting .calendar_title {
   text-align: center;
+  font-size: 20px;
+}
+
+.reserve_setting_btn {
+  margin-top: 20px;
+}
+
+.reserve_setting_outer .reserve_setting {
+  padding: 0 80px !important;
+}
+
+.general_day {
+  color: #212529;
+}
+
+p.day {
+  margin: 10px 0 8px;
+}
+
+.general_title {
+  font-size: 20px;
+}
+
+.reserve_detail {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 5px 10px 1px #d1d1d1;
+  padding: 8px;
+}
+
+.reserve_detail .reserve_detail_table {
+  width: 100%;
+
+}
+
+.reserve_detail .reserve_detail_table th {
+  background-color: #02aad2;
+  color: #fff;
+  padding: 0 15% 0 3%;
+}
+
+.reserve_detail .reserve_detail_table .reserve_person_box:nth-of-type(2n+1) {
+  background-color: #02a9d233;
+}
+
+.reserve_detail .reserve_detail_table .reserve_person {
+  padding: 5px 15% 5px 3%;
+}
+
+.w-60 {
+  width: 60%;
 }
 
 /* モーダル */

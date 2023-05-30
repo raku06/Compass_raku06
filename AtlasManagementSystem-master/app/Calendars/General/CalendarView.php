@@ -21,16 +21,16 @@ class CalendarView{
   function render(){
     $html = [];
     $html[] = '<div class="calendar text-center">';
-    $html[] = '<table class="table">';
+    $html[] = '<table class="table border">';
     $html[] = '<thead>';
     $html[] = '<tr>';
-    $html[] = '<th>月</th>';
-    $html[] = '<th>火</th>';
-    $html[] = '<th>水</th>';
-    $html[] = '<th>木</th>';
-    $html[] = '<th>金</th>';
-    $html[] = '<th>土</th>';
-    $html[] = '<th>日</th>';
+    $html[] = '<th class="border">月</th>';
+    $html[] = '<th class="border">火</th>';
+    $html[] = '<th class="border">水</th>';
+    $html[] = '<th class="border">木</th>';
+    $html[] = '<th class="border">金</th>';
+    $html[] = '<th class="border day-sat">土</th>';
+    $html[] = '<th class="border day-sun">日</th>';
     $html[] = '</tr>';
     $html[] = '</thead>';
     $html[] = '<tbody>';
@@ -46,9 +46,9 @@ class CalendarView{
         $toDay = $this->carbon->copy()->format("Y-m-d");// 今日の日付
 
         if($startDay <= $day->everyDay() && $toDay > $day->everyDay()){
-          $html[] = '<td class="calendar-td past-day">';// past-dayで過去の日付をグレーアウトしてそう。
+          $html[] = '<td class="calendar-td past-day border '.$day->getClassName().'">';// past-dayで過去の日付をグレーアウトしてそう。
         }else{
-          $html[] = '<td class="calendar-td '.$day->getClassName().'">';
+          $html[] = '<td class="calendar-td border '.$day->getClassName().'">';
         }
         $html[] = $day->render();
 
@@ -67,7 +67,7 @@ class CalendarView{
           // 下記、条件の確認
           // 該当日が月初よりも後で、今日よりも後の場合
           if($startDay <= $day->everyDay() && $toDay > $day->everyDay()){
-            $html[] = '<p class="m-auto p-0 w-75" style="font-size:13px">'.$reservePart.'参加</p>';
+            $html[] = '<p class="m-auto p-0 w-75 general_day" style="font-size:13px">'.$reservePart.'参加</p>';
             $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
           }else{
             $html[] = '<button type="submit" class="btn btn-danger p-0 w-75 reserve-modal-open" name="delete_date" style="font-size:12px" value="'. $day->authReserveDate($day->everyDay())->first()->setting_reserve .' " data-part= "'.$reservePart.'" reserve_date="'. $day->authReserveDate($day->everyDay())->first()->setting_reserve .'" reserve_part="'.$day->authReserveDate($day->everyDay())->first()->setting_part.'">'. $reservePart .'</button>';
@@ -76,7 +76,7 @@ class CalendarView{
         // elseif条件追加
         // 該当の日が予約日でなく、月初よりも後で、今日よりも後の場合
         }elseif (!in_array($day->everyDay(), $day->authReserveDay()) && $startDay <= $day->everyDay() && $toDay > $day->everyDay()) {
-          $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px">受付終了</p>';
+          $html[] = '<p class="m-auto p-0 w-75 general_day" style="font-size:12px">受付終了</p>';
             $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
         }else{
           $html[] = $day->selectPart($day->everyDay());
