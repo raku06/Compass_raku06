@@ -1,7 +1,7 @@
 @extends('layouts.sidebar')
 
 @section('content')
-<div class="vh-100 pt-5" style="background:#ECF1F6;">
+<div class=" pt-5 pb-5" style="background:#ECF1F6;">
   <div class=" m-auto pt-5 pb-5" style="border-radius:5px; background:#FFF; box-shadow: 0 5px 10px 1px #d1d1d1; width:80%;">
     <div class="w-75 m-auto" style="border-radius:5px;">
 

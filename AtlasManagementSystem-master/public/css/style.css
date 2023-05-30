@@ -193,7 +193,7 @@ label {
 }
 
 .adjust-area {
-  padding-bottom: 15px;
+  padding-bottom: 10%;
 }
 
 .adjust-area p {
@@ -203,9 +203,10 @@ label {
 .reserve_setting_outer {
   background-color: #fff;
   width: 75%;
-  height: 90%;
+  height: 80%;
   border-radius: 10px;
   box-shadow: 0 5px 10px 1px #d1d1d1;
+  margin: 50px 0;
 }
 
 .reserve_setting .calendar_title {
@@ -226,7 +227,7 @@ label {
 }
 
 p.day {
-  margin: 10px 0 8px;
+  margin: 5% 0 3%;
 }
 
 .general_title {
@@ -558,7 +559,7 @@ p.day {
   bottom: 5px;
 }
 
-.category_btn.like_btn {
+.category_btn.search_like_btn {
   width: 138px;
   background-color: #fc94e2;
   padding: 5px 1px;
@@ -633,7 +634,7 @@ p.day {
   margin: 0 auto;
   /* height: 80vh; */
   /* overflow: scroll; */
-  padding: 0 40px;
+  padding: 0 40px 20px;
   /* background: #FFF; */
   border-radius: 5px;
 }
